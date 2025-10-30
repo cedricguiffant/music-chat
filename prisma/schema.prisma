@@ -1,0 +1,26 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  userId    String
+  content   String
+}
+
+model RoomState {
+  id         Int      @id @default(1)
+  djUserId   String?
+  currentUrl String?
+  updatedAt  DateTime @updatedAt
+}
